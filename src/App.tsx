@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import TablesGenerator from './components/TablesGenerator';
 import './App.css';
 import EllipticCurvePoints from "./components/EllipticCurvePoints.tsx";
+import EllipticCurveGraph from "./components/EllipticCurveGraph.tsx";
 
 const App: React.FC = () => {
     const [view, setView] = useState<string>("");
@@ -14,11 +15,22 @@ const App: React.FC = () => {
             <div className="flex-grow-1">
                 <CHeader>
                     <CContainer fluid>
-                        <CHeaderBrand href="#">Home</CHeaderBrand>
+                        <CHeaderBrand
+                            role="button"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setView("")}
+                        >
+                            Home
+                        </CHeaderBrand>
                     </CContainer>
                 </CHeader>
 
                 <CContainer className="mt-4">
+                    <CRow className="mb-4">
+                        <CCol>
+                            {view === "" && <EllipticCurveGraph />}
+                        </CCol>
+                    </CRow>
                     <CRow>
                         <CCol>
                             {view === "table" && <TablesGenerator />}

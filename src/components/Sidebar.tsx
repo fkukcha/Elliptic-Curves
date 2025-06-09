@@ -26,13 +26,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelect }) => {
             </CSidebarHeader>
             <CSidebarNav>
                 <CNavTitle>ECC</CNavTitle>
-                <CNavItem href="#" onClick={() => onSelect("table")}>
-                    <CiViewTable style={{ marginRight: '8px' }} />
-                    Tables Generator
-                </CNavItem>
                 <CNavItem href="#" onClick={() => onSelect("curvePoints")}>
                     <LuWaypoints style={{ marginRight: '8px' }} />
                     Elliptic Curve Points
+                </CNavItem>
+                <CNavItem href="#" onClick={() => onSelect("table")}>
+                    <CiViewTable style={{ marginRight: '8px' }} />
+                    Tables Generator
                 </CNavItem>
             </CSidebarNav>
         </CSidebar>
