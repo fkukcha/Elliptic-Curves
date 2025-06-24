@@ -10,6 +10,7 @@ import {
 import { CiViewTable } from "react-icons/ci";
 import { BiMath } from "react-icons/bi";
 import { LuWaypoints } from "react-icons/lu";
+import { VscGraphLine } from "react-icons/vsc";
 
 type SidebarProps = {
     onSelect: (view: string) => void;
@@ -25,6 +26,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelect }) => {
                 </CSidebarBrand>
             </CSidebarHeader>
             <CSidebarNav>
+                <CNavTitle>Dashboard</CNavTitle>
+                <CNavItem href="#" onClick={() => onSelect("graph")}>
+                    <VscGraphLine style={{ marginRight: '8px' }} />
+                    Elliptic Curves Graph
+                </CNavItem>
                 <CNavTitle>ECC</CNavTitle>
                 <CNavItem href="#" onClick={() => onSelect("curvePoints")}>
                     <LuWaypoints style={{ marginRight: '8px' }} />

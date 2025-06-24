@@ -33,6 +33,11 @@ const App: React.FC = () => {
                     </CRow>
                     <CRow>
                         <CCol>
+                            {view === "graph" && <EllipticCurveGraph />}
+                        </CCol>
+                    </CRow>
+                    <CRow>
+                        <CCol>
                             {view === "table" && <TablesGenerator />}
                         </CCol>
                     </CRow>
