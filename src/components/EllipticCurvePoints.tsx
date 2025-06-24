@@ -61,29 +61,40 @@ const EllipticCurvePoints: React.FC = () => {
                 </label>
             </div>
             <div>
-                <strong>All points on E(Z<sub>{p}</sub>):</strong>
-                <div>
-                    E(Z<sub>{p}</sub>) = &#123;
-                    {points
-                        .map(pt =>
-                            typeof pt === "string"
-                                ? pt
-                                : `(${pt[0]},${pt[1]})`
-                        )
-                        .join(", ")}
-                    &#125;
-                </div>
+                <strong>Alle Punkte auf E(Z<sub>{p}</sub>):</strong>
+                <pre
+                    style={{
+                        background: "#222",
+                        color: "#fff", // Weißer Text
+                        padding: "16px 20px",
+                        borderRadius: 10,
+                        fontSize: 16,
+                        marginTop: 8,
+                        fontFamily: "Fira Mono, Consolas, monospace",
+                        boxShadow: "0 2px 8px #0002"
+                    }}
+                >{`E(Z_${p}) = { ${points
+                    .map(pt => (typeof pt === "string" ? pt : `(${pt[0]},${pt[1]})`))
+                    .join(", ")} }`}
+                </pre>
             </div>
             <div style={{marginTop: 12}}>
                 <strong>2-Torsion points:</strong>
-                <div>
-                    {torsion2.length === 0
-                        ? <span>Keine</span>
-                        : torsion2.map((pt, i) => (
-                            <span key={i} style={{marginRight: 8}}>({pt[0]},{pt[1]})</span>
-                        ))
-                    }
-                </div>
+                <pre
+                    style={{
+                        background: "#222",
+                        color: "#fff",
+                        padding: "12px 18px",
+                        borderRadius: 10,
+                        fontSize: 15,
+                        marginTop: 8,
+                        fontFamily: "Fira Mono, Consolas, monospace",
+                        boxShadow: "0 2px 8px #0002"
+                    }}
+                >{torsion2.length === 0
+                    ? "Keine"
+                    : `T₂ = { ${torsion2.map(pt => `(${pt[0]},${pt[1]})`).join(", ")} }`
+                }</pre>
             </div>
         </div>
     );
