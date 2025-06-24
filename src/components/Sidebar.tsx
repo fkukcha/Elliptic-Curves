@@ -12,6 +12,8 @@ import { BiMath } from "react-icons/bi";
 import { LuWaypoints } from "react-icons/lu";
 import { VscGraphLine } from "react-icons/vsc";
 import { FaBitcoinSign } from "react-icons/fa6";
+import { TbExchange } from "react-icons/tb";
+
 
 type SidebarProps = {
     onSelect: (view: string) => void;
@@ -45,6 +47,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelect }) => {
                 <CNavItem href="#" onClick={() => onSelect("bitcoinAddress")}>
                     <FaBitcoinSign style={{ marginRight: '8px' }} />
                     Bitcoin Address
+                </CNavItem>
+                <CNavItem href="#" onClick={() => onSelect("ecdhKeyExchange")}>
+                    <TbExchange style={{ marginRight: '8px' }} />
+                    ECDH Key Exchange
                 </CNavItem>
             </CSidebarNav>
         </CSidebar>
