@@ -5,6 +5,7 @@ import TablesGenerator from './components/TablesGenerator';
 import './App.css';
 import EllipticCurvePoints from "./components/EllipticCurvePoints.tsx";
 import EllipticCurveGraph from "./components/EllipticCurveGraph.tsx";
+import BitcoinAddressGenerator from "./components/BitcoinAddressGenerator.tsx";
 
 const App: React.FC = () => {
     const [view, setView] = useState<string>("");
@@ -44,6 +45,11 @@ const App: React.FC = () => {
                     <CRow>
                         <CCol>
                             {view === "curvePoints" && <EllipticCurvePoints />}
+                        </CCol>
+                    </CRow>
+                    <CRow>
+                        <CCol>
+                            {view === "bitcoinAddress" && <BitcoinAddressGenerator />}
                         </CCol>
                     </CRow>
                 </CContainer>
