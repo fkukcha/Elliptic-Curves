@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import BN from 'bn.js';
 
 const a = new BN(0);
@@ -21,12 +21,10 @@ function pointAddition(P: [BN, BN] | null, Q: [BN, BN] | null): [BN, BN] | null 
 
     let m: BN;
     if (P[0].eq(Q[0]) && P[1].eq(Q[1])) {
-        // Point doubling
         const numerator = P[0].pow(new BN(2)).muln(3).add(a);
         const denominator = P[1].muln(2);
         m = numerator.mul(inverseMod(denominator, p)).umod(p);
     } else {
-        // Point addition
         const numerator = Q[1].sub(P[1]);
         const denominator = Q[0].sub(P[0]);
         m = numerator.mul(inverseMod(denominator, p)).umod(p);
@@ -59,11 +57,11 @@ function generateKeyPair(): { privateKey: BN; publicKey: [BN, BN] } {
 
 function computeSharedSecret(privateKey: BN, publicKey: [BN, BN]): BN {
     const shared = scalarMultiplication(privateKey, publicKey)!;
-    return shared[0]; // x-coordinate
+    return shared[0];
 }
 
 const ECDHKeyExchange: React.FC = () => {
-    const [sharedSecret, setSharedSecret] = useState<string | null>(null);
+    const [output, setOutput] = useState<string | null>(null);
 
     const handleGenerate = () => {
         const alice = generateKeyPair();
@@ -72,11 +70,29 @@ const ECDHKeyExchange: React.FC = () => {
         const aliceShared = computeSharedSecret(alice.privateKey, bob.publicKey);
         const bobShared = computeSharedSecret(bob.privateKey, alice.publicKey);
 
+        let result = '';
+        result += 'Alice Private Key: 0x' + alice.privateKey.toString(16) + '\n';
+        result += 'Alice Public Key:\n';
+        result += '  x: 0x' + alice.publicKey[0].toString(16) + '\n';
+        result += '  y: 0x' + alice.publicKey[1].toString(16) + '\n\n';
+
+        result += 'Bob Private Key: 0x' + bob.privateKey.toString(16) + '\n';
+        result += 'Bob Public Key:\n';
+        result += '  x: 0x' + bob.publicKey[0].toString(16) + '\n';
+        result += '  y: 0x' + bob.publicKey[1].toString(16) + '\n\n';
+
+        result += 'Alice computes shared secret with Bob\'s public key:\n';
+        result += '  0x' + aliceShared.toString(16) + '\n';
+        result += 'Bob computes shared secret with Alice\'s public key:\n';
+        result += '  0x' + bobShared.toString(16) + '\n\n';
+
         if (aliceShared.eq(bobShared)) {
-            setSharedSecret('0x' + aliceShared.toString(16));
+            result += '✅ Shared secrets match!';
         } else {
-            setSharedSecret('Shared secrets did not match.');
+            result += '❌ Shared secrets do not match!';
         }
+
+        setOutput(result);
     };
 
     useEffect(() => {
@@ -93,9 +109,9 @@ const ECDHKeyExchange: React.FC = () => {
             >
                 Generate Shared Secret
             </button>
-            {sharedSecret && (
-                <pre className="bg-black text-white p-4 rounded mt-4 font-mono text-sm">
-                    {`Shared Secret: ${sharedSecret}`}
+            {output && (
+                <pre className="bg-black text-white p-4 rounded mt-4 font-mono text-sm whitespace-pre-wrap">
+                    {output}
                 </pre>
             )}
         </div>
