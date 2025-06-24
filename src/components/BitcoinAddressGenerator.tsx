@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ec as EC } from 'elliptic';
 import bs58 from 'bs58';
 import hash from 'hash.js';
@@ -53,6 +53,10 @@ const BitcoinAddressGenerator: React.FC = () => {
         const addr = await generateBitcoinAddress();
         setAddress(addr);
     };
+
+    useEffect(() => {
+        handleGenerate();
+    }, []);
 
     return (
         <div className="p-4 rounded-xl shadow-md bg-white text-gray-800 w-full max-w-lg mx-auto mt-10 space-y-4">
